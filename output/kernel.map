@@ -1,0 +1,98 @@
+
+Discarded input sections
+
+ .bss           0x00000000        0x0 build/drawing.o
+ .ARM.attributes
+                0x00000000       0x16 build/drawing.o
+ .bss           0x00000000        0x0 build/frameBuffer.o
+ .ARM.attributes
+                0x00000000       0x16 build/frameBuffer.o
+ .bss           0x00000000        0x0 build/gpio.o
+ .ARM.attributes
+                0x00000000       0x16 build/gpio.o
+ .bss           0x00000000        0x0 build/mailbox.o
+ .ARM.attributes
+                0x00000000       0x16 build/mailbox.o
+ .bss           0x00000000        0x0 build/main.o
+ .ARM.attributes
+                0x00000000       0x16 build/main.o
+ .bss           0x00000000        0x0 build/random.o
+ .ARM.attributes
+                0x00000000       0x16 build/random.o
+ .bss           0x00000000        0x0 build/sytemTimer.o
+ .ARM.attributes
+                0x00000000       0x16 build/sytemTimer.o
+ .bss           0x00000000        0x0 build/tags.o
+ .ARM.attributes
+                0x00000000       0x16 build/tags.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/drawing.o
+LOAD build/frameBuffer.o
+LOAD build/gpio.o
+LOAD build/mailbox.o
+LOAD build/main.o
+LOAD build/random.o
+LOAD build/sytemTimer.o
+LOAD build/tags.o
+
+.init           0x00000000        0x4
+ *(.init)
+ .init          0x00000000        0x4 build/main.o
+                0x00000000                _start
+
+.text           0x00008000      0x504
+ *(.text)
+ .text          0x00008000      0x1d8 build/drawing.o
+                0x00008000                SetForeColour
+                0x00008018                SetGraphicsAddress
+                0x00008024                DrawPixel
+                0x0000806c                DrawLine
+                0x000080e8                DrawCharacter
+                0x00008158                DrawString
+ .text          0x000081d8       0x68 build/frameBuffer.o
+                0x000081d8                InitialiseFrameBuffer
+ .text          0x00008240      0x11c build/gpio.o
+                0x00008240                GetGpioAddress
+                0x00008248                SetGpioFunction
+                0x00008298                SetGpio
+                0x000082d4                BLINK_LED
+                0x000082f8                TURN_OK_ON
+                0x00008318                TURN_OK_OFF
+                0x00008338                BLINK_OK_FOR_TIME
+ .text          0x0000835c       0x78 build/mailbox.o
+                0x0000835c                GetMailboxBase
+                0x00008364                MailboxWrite
+                0x00008398                MailboxRead
+ .text          0x000083d4       0x68 build/main.o
+ .text          0x0000843c       0x18 build/random.o
+                0x0000843c                Random
+ .text          0x00008454       0x40 build/sytemTimer.o
+                0x00008454                GetSystemTimerBase
+                0x0000845c                GetTimeStamp
+                0x0000846c                SLEEP
+ .text          0x00008494       0x70 build/tags.o
+                0x00008494                FindTag
+
+.data           0x00009000     0x2024
+ *(.data)
+ .data          0x00009000      0x810 build/drawing.o
+ *fill*         0x00009810      0x7f0 00
+ .data          0x0000a000     0x1000 build/frameBuffer.o
+                0x0000a000                FrameBufferInfo
+ .data          0x0000b000        0x0 build/gpio.o
+ .data          0x0000b000        0x0 build/mailbox.o
+ .data          0x0000b000        0x0 build/main.o
+ .data          0x0000b000        0x0 build/random.o
+ .data          0x0000b000        0x0 build/sytemTimer.o
+ .data          0x0000b000       0x24 build/tags.o
+
+/DISCARD/
+ *(*)
+OUTPUT(build/output.elf elf32-littlearm)
