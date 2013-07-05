@@ -8,6 +8,7 @@
 *	main.s contains the main operating system, and IVT code.
 ******************************************************************************/
 
+
 /*
 * .globl is a directive to our assembler, that tells it to export this symbol
 * to the elf file. Convention dictates that the symbol _start is used for the 
